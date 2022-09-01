@@ -8,12 +8,23 @@ import { PhotoFetchService } from '../photo-fetch.service';
 })
 export class PhotoFetcherComponent implements OnInit {
 
+  imgUrl = '';
+
   constructor(private photoFetchService: PhotoFetchService) {}
 
   ngOnInit(): void {
+    this.fetchPhoto();
+  }
+
+  fetchPhoto() {
     this.photoFetchService.fetchPhoto().subscribe((response) => {
-      console.log(response);
+      this.imgUrl = response.urls.regular;
     });
+  }
+
+  fetchNewPhoto() {
+    console.log("In onClick handler...")
+    this.fetchPhoto();
   }
 
 }
